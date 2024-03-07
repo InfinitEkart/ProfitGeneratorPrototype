@@ -95,6 +95,9 @@ function checkForProfit(isProfitVal){
     if(isProfitVal){
         isProfit.innerHTML = "Profit";
         isProfit.style.backgroundColor = "green";
+        roundUpSw.style.backgroundColor = "green";
+        roundUpSw.style.borderWidth = "10";
+        roundUpSw.style.color = "yellow";
     }else{
         isProfit.innerHTML = "Loss";
         isProfit.style.backgroundColor = "red";
