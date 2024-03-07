@@ -23,7 +23,7 @@
             <div class="col"><input type="text" name="category" id="category" readonly  class="form-control"/></div>
             <div class="col"><input type="text" name="asin" id="asin" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="sku" id="sku" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="productWeight" id="productWeight" onkeyup="enableSpINR()" class="form-control"/></div>
+            <div class="col"><input type="text" name="productWeight" id="productWeight" onchange="enableSpINR()" class="form-control"/></div>
         </div>
         <div class="row">
             <div class="col">IND Product Price</div>
@@ -32,7 +32,7 @@
             <div class="col">PW Shipping Charges</div>
         </div>
         <div class="row">
-            <div class="col"><input type="text" name="indPP" id="indPP" class="form-control" onkeyup="enableSpINR()"/></div>
+            <div class="col"><input type="text" name="indPP" id="indPP" class="form-control" onchange="enableSpINR()"/></div>
             <div class="col"><input type="text" name="pwMargin" id="pwMargin" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="swLandingPrice" id="swLandingPrice" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="pwShippingCharges" id="pwShippingCharges"  class="form-control" onkeyup="enableSpINR()"/></div>
@@ -44,10 +44,10 @@
             <div class="col">Aramex Insurance Charges</div>
         </div>
         <div class="row">
-            <div class="col"><input type="text" name="freightChargesPerKg" id="freightChargesPerKg" onkeyup="enableSpINR()" class="form-control"/></div>
+            <div class="col"><input type="text" name="freightChargesPerKg" id="freightChargesPerKg" onchange="enableSpINR()" class="form-control"/></div>
             <div class="col"><input type="text" name="totalFreightCharges" id="totalFreightCharges" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="invoiceFreightCharges" id="invoiceFreightCharges" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="aramexInsuranceCharges" id="aramexInsuranceCharges" onkeyup="enableSpINR()" class="form-control"/></div>
+            <div class="col"><input type="text" name="aramexInsuranceCharges" id="aramexInsuranceCharges" onchange="enableSpINR()" class="form-control"/></div>
         </div>
         <div class="row">
             <div class="col">Aramex Insurance</div>
@@ -71,7 +71,7 @@
             <div class="col"><input type="text" name="vatPwShipment" id="vatPwShipment" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="frdm" id="frdm" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="deliveryDutyPaid" id="deliveryDutyPaid" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="swLocalCourier" id="swLocalCourier" onkeyup="enableSpINR()" class="form-control"/></div>
+            <div class="col"><input type="text" name="swLocalCourier" id="swLocalCourier" onchange="enableSpINR()" class="form-control"/></div>
         </div>
         <div class="row">
             <div class="col">SW Margin</div>
@@ -104,7 +104,7 @@
             <div class="col">Sales Invoice AED</div>
         </div>
         <div class="row">
-            <div class="col"><input type="text" name="spINR" id="spINR" class="form-control" readonly onkeyup="generateProfit()"/></div>
+            <div class="col"><input type="text" name="spINR" id="spINR" class="form-control" readonly /></div>
             <div class="col"><input type="text" name="spAED" id="spAED" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="salesInvoiceINR" id="salesInvoiceINR" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="salesInvoiceAED" id="salesInvoiceAED" readonly class="form-control"/></div>

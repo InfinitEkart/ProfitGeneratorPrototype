@@ -86,7 +86,8 @@ function enableSpINR(){
     getInputs();  
     setDefaultValues();
     if(productWeight.value!="" && indPP.value!="" && pwShippingCharges.value!="" && freightChargesPerKg.value!="" && aramexInsuranceCharges.value!="" && swLocalCourier.value!=""){
-            spINR.readOnly = false;
+            spINR.value = Number(indPP.value);
+            generateProfit();
         }
 }
 
@@ -97,6 +98,9 @@ function checkForProfit(isProfitVal){
     }else{
         isProfit.innerHTML = "Loss";
         isProfit.style.backgroundColor = "red";
+        spINR.value = Number(spINR.value) + 1;
+        generateProfit();
+        spINR.readOnly = false;
     }
 }
 
@@ -125,4 +129,6 @@ function generateProfit(){
     salesInvoiceINR.value = formulas.salesInvoiceINR(Number(spINR.value),Number(amazonCommission.value));
     salesInvoiceAED.value = formulas.salesInvoiceAED(Number(salesInvoiceINR.value),Number(salesInvoiceAEDVal));
     checkForProfit(formulas.isProfit(Number(calculation.value),Number(spINR.value)));
+    spINR.readOnly = true;
+    
 }
