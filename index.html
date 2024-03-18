@@ -6,7 +6,7 @@
     <title>Product Code Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="./formula.js" type="text/javascript"></script>
+    <script src="./main.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="container">
@@ -20,7 +20,7 @@
             <div class="col">Product Weight</div>
         </div>
         <div class="row">
-            <div class="col"><input type="text" name="category" id="category" readonly  class="form-control"/></div>
+            <div class="col"><input type="text" name="category" id="category" onchange="enableSpINR()"  class="form-control"/></div>
             <div class="col"><input type="text" name="asin" id="asin" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="sku" id="sku" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="productWeight" id="productWeight" onchange="enableSpINR()" class="form-control"/></div>
@@ -35,7 +35,7 @@
             <div class="col"><input type="text" name="indPP" id="indPP" class="form-control" onchange="enableSpINR()"/></div>
             <div class="col"><input type="text" name="pwMargin" id="pwMargin" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="swLandingPrice" id="swLandingPrice" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="pwShippingCharges" id="pwShippingCharges"  class="form-control" onkeyup="enableSpINR()"/></div>
+            <div class="col"><input type="text" name="pwShippingCharges" id="pwShippingCharges"  class="form-control" readonly/></div>
         </div>
         <div class="row">
             <div class="col">Freight Charges/KG</div>
@@ -44,10 +44,10 @@
             <div class="col">Aramex Insurance Charges</div>
         </div>
         <div class="row">
-            <div class="col"><input type="text" name="freightChargesPerKg" id="freightChargesPerKg" onchange="enableSpINR()" class="form-control"/></div>
+            <div class="col"><input type="text" name="freightChargesPerKg" id="freightChargesPerKg" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="totalFreightCharges" id="totalFreightCharges" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="invoiceFreightCharges" id="invoiceFreightCharges" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="aramexInsuranceCharges" id="aramexInsuranceCharges" onchange="enableSpINR()" class="form-control"/></div>
+            <div class="col"><input type="text" name="aramexInsuranceCharges" id="aramexInsuranceCharges" readonly class="form-control"/></div>
         </div>
         <div class="row">
             <div class="col">Aramex Insurance</div>
@@ -71,7 +71,7 @@
             <div class="col"><input type="text" name="vatPwShipment" id="vatPwShipment" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="frdm" id="frdm" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="deliveryDutyPaid" id="deliveryDutyPaid" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="swLocalCourier" id="swLocalCourier" onchange="enableSpINR()" class="form-control"/></div>
+            <div class="col"><input type="text" name="swLocalCourier" id="swLocalCourier" readonly class="form-control"/></div>
         </div>
         <div class="row">
             <div class="col">SW Margin</div>
