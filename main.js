@@ -67,8 +67,8 @@ function getInputs(){
 
 function setDefaultValues(){
     //category.value = 15;
-    asin.value = 'B00E966WI0';
-    sku.value = 'BI0401B00E966WI0';
+    //asin.value = 'B00E966WI0';
+    //sku.value = 'BI0401B00E966WI0';
     pwMarginPerVal = 15;
     swDutyPercentVal = 5;
     dutyOnDutyPercentVal = 5;
@@ -89,7 +89,7 @@ function setDefaultValues(){
 function enableSpINR(){  
     getInputs();  
     setDefaultValues();
-    if(productWeight.value!="" && indPP.value!="" && category.value!= ""){
+    if(productWeight.value!="" && indPP.value!="" && category.value!= "" && asin.value != ""){
             pwShippingCharges.value = formulas.pwShippingCharges(Number(productWeight.value), indDB);
             console.log(pwShippingCharges.value);
             spINR.value = (Number(indPP.value) + Number(pwShippingCharges.value) + Number(swLocalCourier.value));
@@ -123,6 +123,7 @@ function checkForProfit(isProfitVal,isIncre){
 
 function generateProfit(isIncre){
     getInputs();
+    sku.value = category.value + productWeight.value;
     pwMargin.value = formulas.pwMargin(Number(indPP.value),Number(pwMarginPerVal));
     swLandingPrice.value = formulas.swLandingPrice(Number(indPP.value),Number(pwMargin.value));
     
