@@ -10,114 +10,76 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col"><h1>Product Cost Generator Prototype</h1></div>
+        <div class="row text-center my-4">
+            <h1>Product Cost Generator Prototype</h1>
         </div>
-        <div class="row">
-            <div class="col">Category %</div>
-            <div class="col">ASIN</div>
-            <div class="col">SKU</div>
-            <div class="col">Product Weight</div>
+        <div class="row my-4">
+            <div class="d-flex justify-content-around">
+                <div class="card" style="width: 18rem;" id="b2bType" onclick="showDetails('b2b')">
+                    <img class="card-img-top" src="./assets/b2b.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Business to Business</h5>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;" id="b2cType" onclick="showDetails('b2c')">
+                    <img class="card-img-top" src="./assets/b2c.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Business to Client</h5>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col"><input type="text" name="category" id="category" onchange="enableSpINR()"  class="form-control"/></div>
-            <div class="col"><input type="text" name="asin" id="asin" onchange="enableSpINR()" class="form-control"/></div>
-            <div class="col"><input type="text" name="sku" id="sku" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="productWeight" id="productWeight" onchange="enableSpINR()" class="form-control"/></div>
+        <div class="d-none" id="b2bDetails">
+            <div class="row my-4">
+                <div class="col">
+                    Country
+                    <select class="form-select" id="country">
+                        <option>KSA</option>
+                    </select>
+                </div>
+                <div class="col">
+                    Courier Partner
+                    <select class="form-select" id="cPartner">
+                        <option>Partner</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary" onclick="goToGenerator('b2b')">Go to Generator</button>
+            </div>
         </div>
-        <div class="row">
-            <div class="col">IND Product Price</div>
-            <div class="col">PW Margin</div>
-            <div class="col">SW Landing Price</div>
-            <div class="col">PW Shipping Charges</div>
-        </div>
-        <div class="row">
-            <div class="col"><input type="text" name="indPP" id="indPP" class="form-control" onchange="enableSpINR()"/></div>
-            <div class="col"><input type="text" name="pwMargin" id="pwMargin" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="swLandingPrice" id="swLandingPrice" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="pwShippingCharges" id="pwShippingCharges"  class="form-control" readonly/></div>
-        </div>
-        <div class="row">
-            <div class="col">Freight Charges/KG</div>
-            <div class="col">Total Freight Charges</div>
-            <div class="col">Invoice Freight Charges</div>
-            <div class="col">Aramex Insurance Charges</div>
-        </div>
-        <div class="row">
-            <div class="col"><input type="text" name="freightChargesPerKg" id="freightChargesPerKg" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="totalFreightCharges" id="totalFreightCharges" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="invoiceFreightCharges" id="invoiceFreightCharges" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="aramexInsuranceCharges" id="aramexInsuranceCharges" readonly class="form-control"/></div>
-        </div>
-        <div class="row">
-            <div class="col">Aramex Insurance</div>
-            <div class="col">CIF Value</div>
-            <div class="col">SW Duty</div>
-            <div class="col">Duty on Duty</div>
-        </div>
-        <div class="row">
-            <div class="col"><input type="text" name="aramexInsurance" id="aramexInsurance" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="cifValue" id="cifValue" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="swDuty" id="swDuty" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="dutyOnDuty" id="dutyOnDuty" readonly class="form-control"/></div>
-        </div>
-        <div class="row">
-            <div class="col">VAT PW Shipment</div>
-            <div class="col">FRDM</div>
-            <div class="col">Delivery Duty Paid</div>
-            <div class="col">SW Local Courier</div>
-        </div>
-        <div class="row">
-            <div class="col"><input type="text" name="vatPwShipment" id="vatPwShipment" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="frdm" id="frdm" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="deliveryDutyPaid" id="deliveryDutyPaid" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="swLocalCourier" id="swLocalCourier" readonly class="form-control"/></div>
-        </div>
-        <div class="row">
-            <div class="col">SW Margin</div>
-            <div class="col">Amazon Commission</div>
-            <div class="col">UAE VAT on Amazon</div>
-            <div class="col">Return On Product</div>
-        </div>
-        <div class="row">
-            <div class="col"><input type="text" name="swMargin" id="swMargin" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="amazonCommission" id="amazonCommission" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="uaeVatOnAmazon" id="uaeVatOnAmazon" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="returnOnProduct" id="returnOnProduct" readonly class="form-control"/></div>
-        </div>
-        <div class="row">
-            <div class="col">Total SW</div>
-            <div class="col">Round Up SW</div>
-            <div class="col">Sw Extra Profit INR</div>
-            <div class="col"></div>
-        </div>
-        <div class="row">
-            <div class="col"><input type="text" name="calculation" id="calculation" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="roundUpSw" id="roundUpSw" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="swExtraProfitINR" id="swExtraProfitINR" readonly class="form-control"/></div>
-            <div class="col"><div id="isProfit">Profit/Loss</div></div>
-        </div>
-        <div class="row">
-            <div class="col">SP INR</div>
-            <div class="col">SP AED</div>
-            <div class="col">Sales Invoice INR</div>
-            <div class="col">Sales Invoice AED</div>
-        </div>
-        <div class="row">
-            <div class="col"><input type="text" name="spINR" id="spINR" class="form-control" readonly /></div>
-            <div class="col"><input type="text" name="spAED" id="spAED" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="salesInvoiceINR" id="salesInvoiceINR" readonly class="form-control"/></div>
-            <div class="col"><input type="text" name="salesInvoiceAED" id="salesInvoiceAED" readonly class="form-control"/></div>
-        </div>
+        <style>
+            img{
+                height:200px;
+                width:250px;
+            }
+        </style>
+        <script>
+            function showDetails(bType){
+                let b2bEle = document.getElementById('b2bType');
+                let b2cEle = document.getElementById('b2cType');
+                let b2bDetailsEle = document.getElementById('b2bDetails');
+                let b2cDetailsEle = document.getElementById('b2bDetails');
+                let chosenClass = "card border border-primary border-5";
+                b2bEle.className="card";
+                b2cEle.className="card";
+                b2bDetailsEle.className="d-none";
+                b2cDetailsEle.className="d-none";
+                if(bType=='b2b'){
+                    b2bEle.className=chosenClass;
+                    b2bDetailsEle.className="d-block";
+                }else{
+                    b2cEle.className=chosenClass;
+                }
+            }
+            function goToGenerator(bType){
+                let country = document.getElementById('country').value;
+                let cPartner = document.getElementById('cPartner').value;
+                sessionStorage.setItem('gen_country',country);
+                sessionStorage.setItem('gen_cPartner',cPartner);
+                window.location.href = bType=='b2b' ? '/b2b.html' : '/b2c.html';
+            }
+        </script>
     </div>
-    <style>
-        #isProfit{
-            border: solid 2px grey;
-            width: 270px;
-            padding: 5px;
-            border-radius: 5px;
-            text-align:center;
-        }
-    </style>
 </body>
 </html>
