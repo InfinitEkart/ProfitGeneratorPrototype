@@ -12,7 +12,7 @@ function loadCategories(){
 loadCategories();
 
 const formulas = {
-    sku: (categoryId,prodWghtInKgs,asin)=> {return  "BI"+categoryId+(prodWghtInKgs*2)+asin},
+    sku: (categoryId,prodWghtInKgs,asin)=> {return  "BI"+categoryId+((prodWghtInKgs*2)<10? '0'+(prodWghtInKgs*2) : (prodWghtInKgs*2))+asin},
     pwMargin : (indPPVal,pwMarginPerVal) => {return indPPVal*(pwMarginPerVal/100)},
     swLandingPrice: (indPPVal,pwMargin) => {return indPPVal + pwMargin},
     pwShippingCharges: (productWeight, indDB) => {return indDB[productWeight]},
