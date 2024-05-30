@@ -176,7 +176,7 @@ function generateProfit(isIncre, isFirstCall){
     calculation.value = formulas.calculation(Number(swLandingPrice.value),Number(pwShippingCharges.value),Number(pwDuty.value),Number(vatPwShipment.value),Number(frdm.value),Number(deliveryDutyPaid.value),Number(swLocalCourier.value),Number(swMargin.value),Number(panelCommission.value),Number(countryVatOnPanel.value),Number(returnOnProduct.value));
     roundUpSw.value = formulas.roundUpSw(Number(calculation.value),Number(roundUpVal));
     swExtraProfitINR.value = formulas.swExtraProfitINR(Number(spINR.value),Number(calculation.value));
-    spCurrency.value = formulas.spCurrency(Number(spINR.value),Number(spCurrencyVal));
+    spCurrency.value = formulas.spCurrency(Number(roundUpSw.value),Number(spCurrencyVal));
     pwInvoiceINR.value = formulas.pwInvoiceINR(Number(swLandingPrice.value));
     salesInvoiceCurrency.value = formulas.pwInvoiceInCurrency(Number(pwInvoiceINR.value),Number(salesInvoiceCurrencyVal));
     checkForProfit(formulas.isProfit(Number(calculation.value),Number(spINR.value)), isIncre);
