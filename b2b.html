@@ -110,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col">SP INR</div>
-            <div class="col">SP Curreny</div>
+            <div class="col">SP Currency</div>
             <div class="col">Sales Invoice INR</div>
             <div class="col">Sales Invoice Currency</div>
         </div>
@@ -120,14 +120,36 @@
             <div class="col"><input type="text" name="pwInvoiceINR" id="pwInvoiceINR" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="salesInvoiceCurrency" id="salesInvoiceCurrency" readonly class="form-control"/></div>
         </div>
+        <div class="border p-4">
+            <div class="row mb-4">
+                <div class="col">SP Currency</div>
+                <div class="col"></div>
+                <div class="col">Diff Sp Amount</div>
+                <div class="col"><input type="text" name="revSpDiff" id="revSpDiff" class="form-control"/></div>
+            </div>
+            <div class="row mb-4">
+                <div class="col"><input type="text" name="revSpCurrency" id="revSpCurrency" class="form-control"/></div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="calcRevDiff()" id="checkDiff">Check Diff</button>
+                    <span id="revResult"> Profit / Loss</span>
+                </div>
+                <div class="col">Diff INR Amount</div>
+                <div class="col"><input type="text" name="revINRDiff" id="revINRDiff" class="form-control"/></div>
+            </div>
+        </div>
+        
     </div>
     <style>
-        #isProfit{
+        #isProfit, #revResult{
             border: solid 2px grey;
             width: 270px;
             padding: 5px;
             border-radius: 5px;
             text-align:center;
+        }
+        #revResult{
+            margin-left: 30px;
+            padding: 10px;
         }
     </style>
     

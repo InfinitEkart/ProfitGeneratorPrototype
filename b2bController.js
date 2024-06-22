@@ -183,3 +183,25 @@ function generateProfit(isIncre, isFirstCall){
    
 }
 
+document.querySelector("#checkDiff").addEventListener('click',calcRevDiff);
+
+function calcRevDiff(){
+    let revSpCurrencyIp = document.getElementById('revSpCurrency');
+    let revSpDiff = document.getElementById('revSpDiff');
+    let revINRDiff = document.getElementById('revINRDiff');
+    let revResult = document.getElementById('revResult');
+
+    if(Number(revSpCurrencyIp.value) >= Number(spCurrency.value))
+    {
+        revResult.innerHTML = "Profit";
+        revResult.className = "bg-success";
+    }else{
+        revResult.innerHTML = "Loss";
+        revResult.className = "bg-danger";
+    }
+
+    revSpDiff.value = Number(revSpCurrencyIp.value)-Number(spCurrency.value);
+    revINRDiff.value = Number(revSpDiff.value)*spCurrencyVal;
+
+}
+
