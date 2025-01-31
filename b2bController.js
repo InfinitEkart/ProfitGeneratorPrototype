@@ -2,7 +2,7 @@
 import {getCategories} from "./tempDb.js";
 import { indDB } from "./tempDb.js";
 
-console.log(getCategories());
+//console.log(getCategories());
 
 function loadCategories(){
     let categoryOptions = "";
@@ -42,146 +42,171 @@ const formulas = {
 /* Declaration */
 var b2bMinMax, category , asin, sku, productWeight, indPP, pwMargin, swLandingPrice, pwShippingCharges, freightChargesPerKg, totalFreightCharges, invoiceFreightCharges, aramexInsuranceCharges, aramexInsurance, cifValue, pwDuty, dutyOnDuty, vatPwShipment, frdm, deliveryDutyPaid, swLocalCourier, swMargin, panelCommission, countryVatOnPanel, returnOnProduct, calculation, roundUpSw, swExtraProfitINR, spINR, spCurrency, isProfit, pwInvoiceINR, salesInvoiceCurrency;
 var pwMarginPerVal, pwDutyPercentVal, dutyOnDutyPercentVal, vatPwShipmentPercentVal, frdmDefaultVal, deliveryDutyPaidVal, swMarginPercentVal,panelCommissionPercentVal, countryVatOnPanelPercentVal, returnOnProductPercentVal, roundUpVal, spCurrencyVal, salesInvoiceCurrencyVal;
+var formData = {};
+var isProfit = "";
+const elementIds = [
+    'b2bMinMax', 'category', 'asin', 'sku', 'productWeight', 'indPP', 'pwMargin', 
+    'swLandingPrice', 'pwShippingCharges', 'freightChargesPerKg', 'totalFreightCharges', 
+    'invoiceFreightCharges', 'aramexInsuranceCharges', 'aramexInsurance', 'cifValue', 
+    'pwDuty', 'dutyOnDuty', 'vatPwShipment', 'frdm', 'deliveryDutyPaid', 'swLocalCourier', 
+    'swMargin', 'panelCommission', 'countryVatOnPanel', 'returnOnProduct', 'calculation', 
+    'roundUpSw', 'swExtraProfitINR', 'spINR', 'spCurrency', 'pwInvoiceINR', 
+    'salesInvoiceCurrency'
+];
 
-function getInputs(){
-    b2bMinMax = document.getElementById('b2bMinMax');
-    category = document.getElementById('category');
-    asin= document.getElementById('asin');
-    sku= document.getElementById('sku');
-    productWeight= document.getElementById('productWeight');
-    indPP= document.getElementById('indPP');
-    pwMargin= document.getElementById('pwMargin');
-    swLandingPrice= document.getElementById('swLandingPrice');
-    pwShippingCharges= document.getElementById('pwShippingCharges');
-    freightChargesPerKg= document.getElementById('freightChargesPerKg');
-    totalFreightCharges= document.getElementById('totalFreightCharges');
-    invoiceFreightCharges= document.getElementById('invoiceFreightCharges');
-    aramexInsuranceCharges= document.getElementById('aramexInsuranceCharges');
-    aramexInsurance= document.getElementById('aramexInsurance');
-    cifValue= document.getElementById('cifValue');
-    pwDuty= document.getElementById('pwDuty');
-    dutyOnDuty= document.getElementById('dutyOnDuty');
-    vatPwShipment= document.getElementById('vatPwShipment');
-    frdm= document.getElementById('frdm');
-    deliveryDutyPaid= document.getElementById('deliveryDutyPaid');
-    swLocalCourier= document.getElementById('swLocalCourier');
-    swMargin= document.getElementById('swMargin');
-    panelCommission= document.getElementById('panelCommission');
-    countryVatOnPanel= document.getElementById('countryVatOnPanel');
-    returnOnProduct= document.getElementById('returnOnProduct');
-    calculation= document.getElementById('calculation');
-    roundUpSw= document.getElementById('roundUpSw');
-    swExtraProfitINR= document.getElementById('swExtraProfitINR');
-    spINR= document.getElementById('spINR');
-    spCurrency= document.getElementById('spCurrency');
-    isProfit= document.getElementById('isProfit');
-    pwInvoiceINR= document.getElementById('pwInvoiceINR');
-    salesInvoiceCurrency= document.getElementById('salesInvoiceCurrency');
+function getInputs() {
+
+    elementIds.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            formData[id] = element.value;
+        }
+    });
+
 }
 
-function setDefaultValues(){
-    pwMarginPerVal = 10;
-    pwDutyPercentVal = 5;
-    dutyOnDutyPercentVal = 5;
-    vatPwShipmentPercentVal = 5;
-    frdmDefaultVal = 464.75;
-    deliveryDutyPaidVal = 168.75;
-    swMarginPercentVal = 15;
-    panelCommissionPercentVal=15;
-    countryVatOnPanelPercentVal = 5;
-    if(b2bMinMax.value == "min")
-        returnOnProductPercentVal = 0;
-    else
-        returnOnProductPercentVal = 5;
-    roundUpVal = 5;
-    spCurrencyVal = 22;
-    salesInvoiceCurrencyVal = 22;
-
-    freightChargesPerKg.value = 3;
-    aramexInsuranceCharges.value = 1;
-    swLocalCourier.value = 236.25;
+function setOutput(){
+    limitDecimalsTo3();
+    elementIds.forEach(id => {
+           document.getElementById(id).value = formData[id];
+        });
 }
 
-export function enableSpINR(){  
-    getInputs();  
+
+function limitDecimalsTo3() {
+    for (const key in formData) {
+        if (formData.hasOwnProperty(key)) {
+            // Check if the value is a number and has decimals
+            if (!isNaN(formData[key]) && typeof formData[key] === 'number') {
+                // Limit the value to 3 decimal places                
+                if (formData[key] === Math.floor(formData[key])) {
+                    formData[key] = Math.floor(formData[key]); // Convert to integer
+                }else{
+                    formData[key] = parseFloat(formData[key]).toFixed(3); 
+                }
+            }
+        }
+    }   
+}
+
+
+function setDefaultValues() {
+    
+    isProfit = document.getElementById('isProfit');
+    roundUpSw = document.getElementById('roundUpSw');
+
+    // Set default values for all form fields inside formData
+    formData.pwMarginPerVal = 10;
+    formData.pwDutyPercentVal = 5;
+    formData.dutyOnDutyPercentVal = 5;
+    formData.vatPwShipmentPercentVal = 5;
+    formData.frdmDefaultVal = 464.75;
+    formData.deliveryDutyPaidVal = 168.75;
+    formData.swMarginPercentVal = 15;
+    formData.panelCommissionPercentVal = 15;
+    formData.countryVatOnPanelPercentVal = 5;
+
+    // Set the returnOnProductPercentVal based on the b2bMinMax value
+    formData.returnOnProductPercentVal = (formData.b2bMinMax === "min") ? 0 : 5;
+
+    formData.roundUpVal = 5;
+    formData.spCurrencyVal = 22;
+    formData.salesInvoiceCurrencyVal = 22;
+
+    // Apply default values for formData fields
+    formData.freightChargesPerKg = 3;
+    formData.aramexInsuranceCharges = 1;
+    formData.swLocalCourier = 236.25;
+}
+
+
+export function enableSpINR(){ 
+        getInputs(); 
+
     setDefaultValues();
-    if(productWeight.value!="" && indPP.value!="" && asin.value != ""){
-            pwShippingCharges.value = formulas.pwShippingCharges(Number(productWeight.value), indDB);
-            generateProfit(true, true);
-    }else{
+    if (formData.productWeight !== "" && formData.indPP !== "" && formData.asin !== "") {
+        formData.pwShippingCharges = formulas.pwShippingCharges(Number(formData.productWeight), indDB);
+        generateProfit(true, true);
+    } else {
         alert("Mandatory fields are missing.");
     }
 }
 
 document.querySelector("button").addEventListener('click',enableSpINR);
 
-function checkForProfit(isProfitVal,isIncre){
-    if(isProfitVal){
+function checkForProfit(isProfitVal, isIncre) {
+    if (isProfitVal) {
         isProfit.innerHTML = "Profit";
         isProfit.style.backgroundColor = "green";
         roundUpSw.style.backgroundColor = "green";
         roundUpSw.style.borderWidth = "10";
         roundUpSw.style.color = "yellow";
-        if(isIncre){
-            spINR.value = Number(spINR.value) - Number(swExtraProfitINR.value);
-            console.log(spINR.value, swExtraProfitINR.value);
-            if(Number(swExtraProfitINR.value) > 3) 
+
+        if (isIncre) {
+            formData.spINR = Number(formData.spINR) - Number(formData.swExtraProfitINR);
+            console.log(formData.spINR, formData.swExtraProfitINR);
+            if (Number(formData.swExtraProfitINR) > 3) 
                 generateProfit(true, false);
             else
                 generateProfit(false, false);
-        }else{
-            swExtraProfitINR.value = Number(roundUpSw.value)-Number(calculation.value);
+        } else {
+            formData.swExtraProfitINR = Number(formData.roundUpSw) - Number(formData.calculation);
         }
-    }else if(isIncre){
+        
+    } else if (isIncre) {
         isProfit.innerHTML = "Loss";
         isProfit.style.backgroundColor = "red";
-        if(Number(spINR.value) < 1000)
-            spINR.value = Number(spINR.value) +100;
-        else if(Number(spINR.value) < 10000)
-            spINR.value = Number(spINR.value) +1000;
-        else if(Number(spINR.value) < 100000)
-            spINR.value = Number(spINR.value) +10000;
+
+        if (Number(formData.spINR) < 1000)
+            formData.spINR = Number(formData.spINR) + 100;
+        else if (Number(formData.spINR) < 10000)
+            formData.spINR = Number(formData.spINR) + 1000;
+        else if (Number(formData.spINR) < 100000)
+            formData.spINR = Number(formData.spINR) + 10000;
         else
-            spINR.value = Number(spINR.value) +100000;
-            
+            formData.spINR = Number(formData.spINR) + 100000;
+
+           //console.log(formData.spINR);
         generateProfit(isIncre, false);
     }
+    //console.log("OUTPUT ",formData);
+    setOutput();
 }
-
 function generateProfit(isIncre, isFirstCall){
-    getInputs();
-    sku.value = formulas.sku(category.value,productWeight.value,asin.value);
-    pwMargin.value = formulas.pwMargin(Number(indPP.value),Number(pwMarginPerVal));
-    swLandingPrice.value = formulas.swLandingPrice(Number(indPP.value),Number(pwMargin.value));
+    //console.log(formData);
+    formData.sku = formulas.sku(formData.category, formData.productWeight, formData.asin);
+    formData.pwMargin = formulas.pwMargin(Number(formData.indPP), Number(formData.pwMarginPerVal));
+    formData.swLandingPrice = formulas.swLandingPrice(Number(formData.indPP), Number(formData.pwMargin));
     
-    totalFreightCharges.value = formulas.totalFreightCharges(Number(swLandingPrice.value),Number(productWeight.value),Number(freightChargesPerKg.value));
-    invoiceFreightCharges.value = formulas.invoiceFreightCharges(Number(swLandingPrice.value),Number(totalFreightCharges.value));
-    aramexInsurance.value = formulas.aramexInsurance(Number(invoiceFreightCharges.value),Number( aramexInsuranceCharges.value));
-    cifValue.value = formulas.cifValue(Number(swLandingPrice.value),Number(pwShippingCharges.value),Number(totalFreightCharges.value),Number(aramexInsurance.value));
-    pwDuty.value = formulas.pwDuty(Number(swLandingPrice.value),Number(cifValue.value),Number(pwDutyPercentVal));
-    dutyOnDuty.value = formulas.dutyOnDuty(Number(pwDuty.value),Number(dutyOnDutyPercentVal));
-    frdm.value = formulas.frdm(Number(swLandingPrice.value),Number(frdmDefaultVal));
-    deliveryDutyPaid.value = formulas.deliveryDutyPaid(Number(swLandingPrice.value),Number(deliveryDutyPaidVal));
+    formData.totalFreightCharges = formulas.totalFreightCharges(Number(formData.swLandingPrice), Number(formData.productWeight), Number(formData.freightChargesPerKg));
+    formData.invoiceFreightCharges = formulas.invoiceFreightCharges(Number(formData.swLandingPrice), Number(formData.totalFreightCharges));
+    formData.aramexInsurance = formulas.aramexInsurance(Number(formData.invoiceFreightCharges), Number(formData.aramexInsuranceCharges));
+    formData.cifValue = formulas.cifValue(Number(formData.swLandingPrice), Number(formData.pwShippingCharges), Number(formData.totalFreightCharges), Number(formData.aramexInsurance));
+    formData.pwDuty = formulas.pwDuty(Number(formData.swLandingPrice), Number(formData.cifValue), Number(formData.pwDutyPercentVal));
+    formData.dutyOnDuty = formulas.dutyOnDuty(Number(formData.pwDuty), Number(formData.dutyOnDutyPercentVal));
+    formData.frdm = formulas.frdm(Number(formData.swLandingPrice), Number(formData.frdmDefaultVal));
+    formData.deliveryDutyPaid = formulas.deliveryDutyPaid(Number(formData.swLandingPrice), Number(formData.deliveryDutyPaidVal));
     
     if(isFirstCall){
-        spINR.value = (Number(swLandingPrice.value)+Number(pwShippingCharges.value)+Number(dutyOnDuty.value)+Number(frdm.value)+Number(deliveryDutyPaid.value)+Number(swLocalCourier.value));
-        spINR.value = Number(spINR.value)+Math.round(Number(spINR.value)/2);
+        formData.spINR = (Number(formData.swLandingPrice) + Number(formData.pwShippingCharges) + Number(formData.dutyOnDuty) + Number(formData.frdm) + Number(formData.deliveryDutyPaid) + Number(formData.swLocalCourier));
+        formData.spINR = Number(formData.spINR) + Math.round(Number(formData.spINR) / 2);
+       
     }   
-    pwInvoiceINR.value = formulas.pwInvoiceINR(Number(swLandingPrice.value));
-    vatPwShipment.value = formulas.vatPwShipment(Number(pwInvoiceINR.value),Number(vatPwShipmentPercentVal));
-    swMargin.value = formulas.swMargin(Number(spINR.value),Number(swMarginPercentVal));
-    panelCommission.value = formulas.panelCommission(Number(spINR.value),Number(panelCommissionPercentVal));
-    countryVatOnPanel.value = formulas.countryVatOnPanel(Number(spINR.value),Number(countryVatOnPanelPercentVal));
-    returnOnProduct.value = formulas.returnOnProduct(Number(spINR.value),Number(returnOnProductPercentVal));
-    calculation.value = formulas.calculation(Number(swLandingPrice.value),Number(pwShippingCharges.value),Number(pwDuty.value),Number(vatPwShipment.value),Number(frdm.value),Number(deliveryDutyPaid.value),Number(swLocalCourier.value),Number(swMargin.value),Number(panelCommission.value),Number(countryVatOnPanel.value),Number(returnOnProduct.value));
-    roundUpSw.value = formulas.roundUpSw(Number(calculation.value),Number(roundUpVal));
-    swExtraProfitINR.value = formulas.swExtraProfitINR(Number(spINR.value),Number(calculation.value));
-    spCurrency.value = formulas.spCurrency(Number(roundUpSw.value),Number(spCurrencyVal));
-    pwInvoiceINR.value = formulas.pwInvoiceINR(Number(swLandingPrice.value));
-    salesInvoiceCurrency.value = formulas.pwInvoiceInCurrency(Number(pwInvoiceINR.value),Number(salesInvoiceCurrencyVal));
-    checkForProfit(formulas.isProfit(Number(calculation.value),Number(spINR.value)), isIncre);
-   
+    formData.pwInvoiceINR = formulas.pwInvoiceINR(Number(formData.swLandingPrice));
+    formData.vatPwShipment = formulas.vatPwShipment(Number(formData.pwInvoiceINR), Number(formData.vatPwShipmentPercentVal));
+    formData.swMargin = formulas.swMargin(Number(formData.spINR), Number(formData.swMarginPercentVal));
+    formData.panelCommission = formulas.panelCommission(Number(formData.spINR), Number(formData.panelCommissionPercentVal));
+    formData.countryVatOnPanel = formulas.countryVatOnPanel(Number(formData.spINR), Number(formData.countryVatOnPanelPercentVal));
+    formData.returnOnProduct = formulas.returnOnProduct(Number(formData.spINR), Number(formData.returnOnProductPercentVal));
+    formData.calculation = formulas.calculation(Number(formData.swLandingPrice), Number(formData.pwShippingCharges), Number(formData.pwDuty), Number(formData.vatPwShipment), Number(formData.frdm), Number(formData.deliveryDutyPaid), Number(formData.swLocalCourier), Number(formData.swMargin), Number(formData.panelCommission), Number(formData.countryVatOnPanel), Number(formData.returnOnProduct));
+    formData.roundUpSw = formulas.roundUpSw(Number(formData.calculation), Number(formData.roundUpVal));
+    formData.swExtraProfitINR = formulas.swExtraProfitINR(Number(formData.spINR), Number(formData.calculation));
+    formData.spCurrency = formulas.spCurrency(Number(formData.roundUpSw), Number(formData.spCurrencyVal));
+    formData.pwInvoiceINR = formulas.pwInvoiceINR(Number(formData.swLandingPrice));
+    formData.salesInvoiceCurrency = formulas.pwInvoiceInCurrency(Number(formData.pwInvoiceINR), Number(formData.salesInvoiceCurrencyVal));
+    checkForProfit(formulas.isProfit(Number(formData.calculation), Number(formData.spINR)), isIncre);
 }
+
 
 document.querySelector("#checkDiff").addEventListener('click',calcRevDiff);
 
@@ -191,7 +216,7 @@ function calcRevDiff(){
     let revINRDiff = document.getElementById('revINRDiff');
     let revResult = document.getElementById('revResult');
 
-    if(Number(revSpCurrencyIp.value) >= Number(spCurrency.value))
+    if(Number(revSpCurrencyIp.value) >= Number(formData.spCurrency))
     {
         revResult.innerHTML = "Profit";
         revResult.className = "bg-success";
@@ -200,8 +225,45 @@ function calcRevDiff(){
         revResult.className = "bg-danger";
     }
 
-    revSpDiff.value = Number(revSpCurrencyIp.value)-Number(spCurrency.value);
-    revINRDiff.value = Number(revSpDiff.value)*spCurrencyVal;
+    revSpDiff.value = Number(revSpCurrencyIp.value)-Number(formData.spCurrency);
+    revINRDiff.value = Number(revSpDiff.value)*formData.spCurrencyVal;
 
 }
 
+
+export function processBulkData(jsonData){
+
+    console.log(jsonData);
+    let opJsons = [];
+    for(let xlData of jsonData){
+
+        document.getElementById('asin').value = xlData.ASIN;
+        
+        document.getElementById('productWeight').value = xlData.ProductWght;
+        document.getElementById('indPP').value = xlData.INDProductPrice;
+        //formData.asin = xlData.ASIN;
+        let selectedCategory = getCategories().filter((category)=> category.categoryDesc==xlData.Category);
+        //console.log(selectedCategory);
+        //formData.productWeight = Number(xlData.ProductWght);
+        //formData.indPP = Number(xlData.INDProductPrice);
+
+        if(selectedCategory.length > 0 )
+        {  
+            document.getElementById('category').value = selectedCategory[0].prId;
+            //formData.category = selectedCategory[0].prId;       
+            enableSpINR(true);
+            console.log("Loop OP ", formData);
+            xlData.RoundUp = formData.roundUpSw;
+            xlData.SPINR = formData.spINR;
+            xlData.ExtraProfitInINR = formData.swExtraProfitINR;
+            xlData.spCurrencyValue = formData.spCurrency;
+            xlData.ProfitOrLoss = "PROFIT";
+            opJsons.push(xlData);
+            formData = {};
+        }else{
+            alert("Invalid Category");
+        }
+       // console.log(opJsons);
+    }
+    return opJsons;
+}

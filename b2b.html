@@ -18,6 +18,9 @@
                     <option value="max">B2B Max</option>
                 </select>
             </div>
+            <div class="col-2">
+                <a type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#bulkProcess">Bulk Upload</a>
+            </div>
         </div>
         <div class="row">
             <div class="col">ASIN</div>
@@ -34,7 +37,7 @@
             <div class="col"><input type="text" name="indPP" id="indPP" class="form-control" /></div>
         </div>
         <div class="row my-4">
-            <button type="button" class="btn btn-primary" name="checkProfitBtn">Check for Profit</button>
+            <button type="button" class="btn btn-primary" id="checkProfitBtn" name="checkProfitBtn">Check for Profit</button>
         </div>
         <div class="row">
             <div class="col">SKU</div>
@@ -120,7 +123,7 @@
             <div class="col"><input type="text" name="pwInvoiceINR" id="pwInvoiceINR" readonly class="form-control"/></div>
             <div class="col"><input type="text" name="salesInvoiceCurrency" id="salesInvoiceCurrency" readonly class="form-control"/></div>
         </div>
-        <div class="border p-4">
+        <div class="border p-4 mb-4">
             <div class="row mb-4">
                 <div class="col">SP Currency</div>
                 <div class="col"></div>
@@ -139,6 +142,26 @@
         </div>
         
     </div>
+    <!-- Bulk Upload-->
+    <div class="modal fade " id="bulkProcess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bulkProcess" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bulkProcessLabel">Bulk Processing</h5>
+            </div>
+            <div class="modal-body">
+              <input type="file" class="form-control" id="bulkFile" name="bulkFile"/>
+              <br>
+              <button type="button" class="btn btn-success" id="bulkOpBtn" disabled>Download Processed Excel</button>
+            </div>
+            <div class="modal-footer">
+                <h6>*Bulk Process will be stopped and can't resume, if cancelled before completion</h5>
+              <button class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
+              <button type="button" class="btn btn-primary" id="bulkUploadBtn">Check for Profit</button>
+            </div>
+          </div>
+        </div>
+    </div>
     <style>
         #isProfit, #revResult{
             border: solid 2px grey;
@@ -152,7 +175,9 @@
             padding: 10px;
         }
     </style>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <script src="./b2bController.js" type="module"></script>
+    <script src="./bulkProcess.js" type="module"></script>
+    
 </body>
 </html>

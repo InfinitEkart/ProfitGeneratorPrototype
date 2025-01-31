@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel to JSON</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+</head>
+<body>
+  <input type="file" id="excel-file" />
+<br>
+  <button onclick="downloadExcel()">Download Excel</button>
+  <script>
+    var jsonDataG ={};
+    document.getElementById('excel-file').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const data = e.target.result;
+          const workbook = XLSX.read(data, { type: 'binary' });
+
+          // Get the first sheet
+          const sheet = workbook.Sheets[workbook.SheetNames[0]];
+
+          // Convert sheet to JSON
+          const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+          // Output the JSON data
+          console.log(jsonData);
+          jsonDataG = jsonData;
+          let tempData = jsonDataG[1];
+          console.log(tempData);
+          tempData = {...tempData, RoundUp:126589};
+          console.log(tempData);
+          jsonDataG[1] = tempData;
+          jsonDataG.push({ASIN:"ANG12433",Category:"CUTE",INDProductPrice:1680,ProductWght:5, RoundUp:123,INRProfit:56});
+        };
+        reader.readAsBinaryString(file);
+      }
+    });
+
+    function downloadExcel() {
+      const jsonData = [
+        { "name": "John", "age": 30, "city": "New York" },
+        { "name": "Jane", "age": 25, "city": "Los Angeles" }
+      ];
+
+      // Convert JSON to a worksheet
+      const ws = XLSX.utils.json_to_sheet(jsonDataG);
+
+      // Create a new workbook
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      // Generate and download the Excel file
+      XLSX.writeFile(wb, "output.xlsx");
+    }
+  </script>
+</body>
+</html>
